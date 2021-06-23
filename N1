@@ -1,0 +1,34 @@
+import random
+from random import randint
+import numpy as np
+
+#0. зафиксируйте свой любимый seed
+np.random.seed(2)
+
+#1. Создайте трехмерный массив со случайными числами от 97 до 99
+a = np.random.randint(97, 99, size = (2, 2, 2))
+print("3D matrix:\n ", a)
+
+#2. Создайте квдартраный массив размером 5x5 с целыми числами от -10 до 10
+#   (зафиксируйте этот массив А)
+A = np.random.randint(-10, 10, size = (5, 5))
+print("Matrix A:\n ", A)
+
+#3. Найдите собственные векторы предыдущего массива (А)
+print("Eigenvector:\n ", np.linalg.eig(A))
+
+#4. Замените первые 5 чисел A на максимумы по столбцам и сохраните в массив B
+B = A.view()
+B[0] = B.max(axis=0)
+print("Matrix B:\n ", B)
+      
+#5. Конкатенируйте 4 массива в массив вида:
+
+# A B
+# C D
+# где 
+#     C - транспонированный B
+#     D - поэлементно умноженный A на С
+# Размер массива должен быть 10x10
+
+print(np.vstack([np.hstack([A, B]), np.hstack([B.view().T, A.view()*B.view().T])]))
